@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento BRINSA · Distrileco</title>
+<meta name="description" content="Portal de seguimiento de ventas del proveedor BRINSA en Distrileco Caucasia, clasificado por ubicación. Vibras Positivas HM.">
+<meta name="theme-color" content="#0B4F8A">
+<meta property="og:title"       content="Seguimiento BRINSA · Distrileco">
+<meta property="og:description" content="Ventas BRINSA clasificadas por ubicación. Distrileco Caucasia S.A.S.">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://seguimiento-brinsa.distrileco.com/">
+<meta property="og:image"       content="https://seguimiento-brinsa.distrileco.com/og-brinsa.png">
+<meta property="og:site_name"   content="Distrileco · Vibras Positivas HM">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Seguimiento BRINSA · Distrileco">
+<meta name="twitter:image"       content="https://seguimiento-brinsa.distrileco.com/og-brinsa.png">
+<style>
+  :root{--brinsa:#0B4F8A;--brinsa-2:#1CA5C4;--brinsa-3:#0d3b66;--bg:#eef2f6;--card:#fff;--ink:#122a3f;--muted:#6b7f92;--line:#e2e8f0;--shadow:0 4px 14px rgba(11,79,138,.08)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+  header{background:linear-gradient(135deg,var(--brinsa),var(--brinsa-3));color:#fff;padding:16px 20px;box-shadow:var(--shadow);position:sticky;top:0;z-index:20}
+  .htop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+  .logo{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:22px}
+  .htitle h1{font-size:18px;font-weight:700}.htitle p{font-size:12px;opacity:.85}
+  .pill{margin-left:auto;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600}
+  .wrap{max-width:1200px;margin:0 auto;padding:18px 16px 60px}
+  .filters{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px}
+  .fld{display:flex;flex-direction:column;gap:4px}
+  .fld label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+  .fld select{border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:14px;min-width:180px;background:#fff}
+  .btn{background:var(--brinsa);color:#fff;border:0;border-radius:9px;padding:9px 16px;font-weight:600;cursor:pointer;font-size:14px}
+  .btn:hover{background:var(--brinsa-3)}
+  .btn.ghost{background:#eaf3fb;color:var(--brinsa)}
+  /* Banner total */
+  .banner{background:linear-gradient(135deg,var(--brinsa),var(--brinsa-2));color:#fff;border-radius:16px;padding:20px 24px;box-shadow:var(--shadow);margin-bottom:18px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .banner .big{font-size:38px;font-weight:800;line-height:1}
+  .banner .big-lbl{font-size:12px;opacity:.85;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+  .banner .mini{display:flex;gap:22px;flex-wrap:wrap;margin-left:auto}
+  .banner .mini div{text-align:center}
+  .banner .mini .n{font-size:20px;font-weight:700}
+  .banner .mini .l{font-size:11px;opacity:.85;text-transform:uppercase;letter-spacing:.4px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+  .kpi{background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--shadow);border-left:4px solid var(--brinsa-2)}
+  .kpi .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+  .kpi .val{font-size:22px;font-weight:800;margin-top:4px;color:var(--brinsa)}
+  .kpi .sub{font-size:11px;color:var(--muted);margin-top:2px}
+  .card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+  .card h2{font-size:15px;padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .card h2 .tag{margin-left:auto;font-size:11px;color:var(--muted);font-weight:500}
+  .cbody{padding:4px 6px 10px}
+  .ubic-row,.vend-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;transition:background .15s}
+  .ubic-row:hover,.vend-row:hover{background:#f4f9ff}
+  .ubic-row.active,.vend-row.active{background:#e7f2fc;outline:1px solid var(--brinsa-2)}
+  .rname{flex:0 0 200px;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--brinsa-2)}
+  .bar-wrap{flex:1;background:#eef3f8;border-radius:8px;height:20px;overflow:hidden}
+  .bar{height:100%;background:linear-gradient(90deg,var(--brinsa-2),var(--brinsa));border-radius:8px;min-width:2px}
+  .rval{flex:0 0 130px;text-align:right;font-weight:700;font-size:13px}
+  .rsub{flex:0 0 110px;text-align:right;font-size:11px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f6f9fc;font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);position:sticky;top:0;cursor:pointer;user-select:none}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tbody tr.clk{cursor:pointer}
+  tbody tr:hover{background:#f7fbff}
+  tbody tr.active{background:#e7f2fc}
+  .scroll{max-height:440px;overflow:auto}
+  .scroll-x{overflow-x:auto}
+  .wa{display:inline-flex;align-items:center;gap:5px;background:#25d366;color:#fff;padding:5px 9px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none}
+  .muted{color:var(--muted)}.empty{padding:26px;text-align:center;color:var(--muted)}.loading{padding:26px;text-align:center;color:var(--brinsa);font-weight:600}
+  .chip{display:inline-flex;align-items:center;gap:5px;background:#eaf3fb;color:var(--brinsa);padding:3px 9px;border-radius:14px;font-size:11px;font-weight:600}
+  .chip b{font-weight:800}
+  .chip .x{cursor:pointer;font-weight:800;margin-left:2px}
+  .filtros-activos{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px;min-height:24px}
+  /* Matriz */
+  .matriz td,.matriz th{text-align:right;white-space:nowrap;font-size:12px;padding:7px 10px}
+  .matriz th:first-child,.matriz td:first-child{text-align:left;position:sticky;left:0;background:#f6f9fc;font-weight:600}
+  .matriz tfoot td{font-weight:800;background:#eaf3fb;color:var(--brinsa)}
+  .matriz td.tot{font-weight:700;background:#f4f9ff}
+  .heat{border-radius:4px;padding:2px 6px}
+  footer{text-align:center;padding:22px 16px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);background:var(--card)}
+  footer b{color:var(--brinsa)}
+  @media(max-width:640px){.rname{flex-basis:120px}.rval{flex-basis:95px}.rsub{display:none}.hide-sm{display:none}.banner .big{font-size:30px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htop">
+    <div class="logo">🧂</div>
+    <div class="htitle"><h1>Seguimiento BRINSA</h1><p>Distrileco Caucasia S.A.S. · Clasificado por ubicación</p></div>
+    <span class="pill">NUMPROVEE 8</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="filters">
+    <div class="fld"><label>Mes</label><select id="mes" onchange="cargarTodo()"><option>Cargando…</option></select></div>
+    <div class="fld"><label>Vendedor</label><select id="selVend" onchange="cambiarVend(this.value)"><option value="">Todos</option></select></div>
+    <button class="btn" onclick="cargarTodo()">🔍 Consultar</button>
+  </div>
+
+  <!-- BANNER TOTAL GENERAL -->
+  <div class="banner" id="banner">
+    <div>
+      <div class="big-lbl">Venta NETA del mes · BRINSA (brutas − devoluciones)</div>
+      <div class="big" id="bVenta">—</div>
+    </div>
+    <div class="mini">
+      <div><div class="n" id="bBrutas">—</div><div class="l">Brutas</div></div>
+      <div><div class="n" id="bDev">—</div><div class="l">Devoluciones</div></div>
+      <div><div class="n" id="bUnid">—</div><div class="l">Unidades</div></div>
+      <div><div class="n" id="bFact">—</div><div class="l">Facturas</div></div>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="lbl">Venta total (neto)</div><div class="val" id="kVenta">—</div><div class="sub">sin IVA · brutas − devoluciones</div></div>
+    <div class="kpi"><div class="lbl">Unidades</div><div class="val" id="kUnid">—</div></div>
+    <div class="kpi"><div class="lbl">Ubicaciones</div><div class="val" id="kUbic">—</div></div>
+    <div class="kpi"><div class="lbl">Productos</div><div class="val" id="kProd">—</div></div>
+    <div class="kpi"><div class="lbl">Clientes</div><div class="val" id="kCli">—</div></div>
+  </div>
+
+  <!-- Filtros activos -->
+  <div class="filtros-activos" id="filtros"></div>
+
+  <!-- POR UBICACION -->
+  <div class="card">
+    <h2>📍 Ventas por ubicación <span class="tag">clic para filtrar</span></h2>
+    <div class="cbody" id="ubicList"><div class="loading">Cargando…</div></div>
+  </div>
+
+  <!-- POR VENDEDOR (tabla) -->
+  <div class="card">
+    <h2>🏆 Ventas por vendedor <span class="tag">clic en la fila para filtrar</span></h2>
+    <div class="scroll">
+      <table id="tVend">
+        <thead><tr>
+          <th data-k="vendedor">Vendedor</th>
+          <th data-k="clientes" class="num">Cli.</th>
+          <th data-k="unidades" class="num hide-sm">Unid.</th>
+          <th data-k="brutas" class="num">Brutas</th>
+          <th data-k="devoluciones" class="num">Devol.</th>
+          <th data-k="volumen" class="num">Neto</th>
+          <th data-k="ticket" class="num hide-sm">Ticket</th>
+        </tr></thead>
+        <tbody><tr><td colspan="7" class="loading">Cargando…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MATRIZ vendedor x ubicacion -->
+  <div class="card">
+    <h2>🔀 Matriz ubicación × vendedor <span class="tag">cada vendedor en su columna · neto por celda</span></h2>
+    <div class="scroll scroll-x" id="matrizBox"><div class="loading">Cargando…</div></div>
+  </div>
+
+  <!-- PRODUCTOS -->
+  <div class="card">
+    <h2>📦 Productos <span class="tag" id="prodTag">todo</span></h2>
+    <div class="scroll">
+      <table id="tProd">
+        <thead><tr>
+          <th data-k="referencia">Ref.</th>
+          <th data-k="descripcion">Descripción</th>
+          <th data-k="ubicacion" class="hide-sm">Ubicación</th>
+          <th data-k="unidades" class="num">Unid.</th>
+          <th data-k="volumen" class="num">Venta</th>
+        </tr></thead>
+        <tbody><tr><td colspan="5" class="loading">Cargando…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CLIENTES -->
+  <div class="card">
+    <h2>👥 Top clientes <span class="tag" id="cliTag">todo</span></h2>
+    <div class="scroll">
+      <table id="tCli">
+        <thead><tr>
+          <th data-k="cliente">Cliente</th>
+          <th data-k="ciudad" class="hide-sm">Ciudad</th>
+          <th data-k="vendedor" class="hide-sm">Vend.</th>
+          <th data-k="unidades" class="num">Unid.</th>
+          <th data-k="volumen" class="num">Venta</th>
+          <th>WhatsApp</th>
+        </tr></thead>
+        <tbody><tr><td colspan="6" class="loading">Cargando…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Desarrollada por <b>Vibras Positivas HM</b> — Derechos de Autor Reservados<br>
+  <span class="muted">Distrileco Caucasia S.A.S. · Seguimiento BRINSA · <span id="reloj"></span></span>
+</footer>
+
+<script>
+const API='';
+let ubicSel=null, vendSel=null;
+let cacheProd=[], cacheCli=[], cacheVend=[], cacheUbic=[], cacheMatriz=[], cacheTotal={};
+let sortProd={k:'volumen',dir:-1}, sortCli={k:'volumen',dir:-1}, sortVend={k:'volumen',dir:-1};
+
+const MESES=['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const COP=n=>'$'+(Math.round(n||0)).toLocaleString('es-CO');
+const NUM=n=>(Math.round(n||0)).toLocaleString('es-CO');
+const KM=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':NUM(n);
+const q=s=>document.querySelector(s);
+const esc=s=>(s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fechaCol(){return new Date(Date.now()-5*3600*1000);}
+function nombreMes(m){return `${MESES[+m.slice(4,6)]} ${m.slice(0,4)}`;}
+
+async function get(path){
+  const r=await fetch(`${API}${path}?mes=${q('#mes').value}`);
+  const j=await r.json();
+  if(!j.ok) throw new Error(j.error||'error');
+  return j.data;
+}
+
+async function initMeses(){
+  try{
+    const r=await fetch(`${API}/api/meses`); const j=await r.json();
+    const sel=q('#mes');
+    if(j.ok&&j.data.length){ sel.innerHTML=j.data.map(m=>`<option value="${m}">${nombreMes(m)}</option>`).join(''); }
+    else { const d=fechaCol(),m=`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}`; sel.innerHTML=`<option value="${m}">${nombreMes(m)}</option>`; }
+    cargarTodo();
+  }catch(e){ q('#mes').innerHTML='<option>Error</option>'; }
+}
+
+async function cargarTodo(){
+  ubicSel=null; vendSel=null; pintarFiltros();
+  await Promise.all([cargarTotal(),cargarUbic(),cargarVend(),cargarMatriz(),cargarProd(),cargarCli()]);
+}
+
+// ── TOTAL GENERAL ──
+async function cargarTotal(){
+  try{ const d=await get('/api/total'); cacheTotal=(d&&d[0])||{}; renderResumen(); }
+  catch(e){ q('#bVenta').textContent='Error'; }
+}
+function renderResumen(){
+  let s=cacheTotal;
+  if(vendSel){
+    const v=cacheVend.find(r=>String(r.vendedor)===String(vendSel));
+    if(v) s={netas:v.volumen,brutas:v.brutas,devoluciones:v.devoluciones,unidades:v.unidades,
+             facturas:v.facturas,ubicaciones:v.ubicaciones,productos:v.productos,clientes:v.clientes};
+  }
+  q('#bVenta').textContent=COP(s.netas);
+  q('#bBrutas').textContent=COP(s.brutas);
+  q('#bDev').textContent=COP(s.devoluciones);
+  q('#bUnid').textContent=NUM(s.unidades);
+  q('#bFact').textContent=NUM(s.facturas);
+  q('#kVenta').textContent=COP(s.netas); q('#kUnid').textContent=NUM(s.unidades);
+  q('#kUbic').textContent=NUM(s.ubicaciones); q('#kProd').textContent=NUM(s.productos);
+  q('#kCli').textContent=NUM(s.clientes);
+}
+
+// ── FILTROS ACTIVOS ──
+function pintarFiltros(){
+  const c=q('#filtros'); const chips=[];
+  if(ubicSel) chips.push(`<span class="chip">📍 <b>${esc(ubicSel)}</b><span class="x" onclick="limpiar('ubic')">✕</span></span>`);
+  if(vendSel) chips.push(`<span class="chip">🧑 <b>${esc(vendSel)} ${esc(nombreVend(vendSel))}</b><span class="x" onclick="limpiar('vend')">✕</span></span>`);
+  if(chips.length) chips.push(`<span class="chip" style="background:#fee2e2;color:#b91c1c;cursor:pointer" onclick="limpiar('all')">Limpiar todo ✕</span>`);
+  c.innerHTML=chips.length?('<span class="muted" style="font-size:12px">Filtros:</span> '+chips.join('')):'';
+  const lbl=[ubicSel?`📍 ${esc(ubicSel)}`:'',vendSel?`🧑 ${esc(vendSel)} ${esc(nombreVend(vendSel))}`:''].filter(Boolean).join(' · ')||'todo';
+  q('#prodTag').textContent=lbl; q('#cliTag').textContent=lbl;
+}
+function limpiar(t){
+  if(t==='ubic'||t==='all') ubicSel=null;
+  if(t==='vend'||t==='all') vendSel=null;
+  const sel=q('#selVend'); if(sel) sel.value=vendSel||'';
+  document.querySelectorAll('#tVend tr').forEach(x=>x.classList.toggle('active', String(x.dataset.v)===String(vendSel)));
+  pintarFiltros(); renderResumen(); renderUbic(); pintarProd(); pintarCli();
+}
+function cssEsc(s){ return (s??'').toString().replace(/["\\]/g,'\\$&'); }
+
+// ── POR UBICACION ──
+async function cargarUbic(){
+  const cont=q('#ubicList'); cont.innerHTML='<div class="loading">Cargando…</div>';
+  try{ cacheUbic=await get('/api/bloque2'); renderUbic(); }
+  catch(e){ cont.innerHTML='<div class="empty">Error: '+e.message+'</div>'; }
+}
+function renderUbic(){
+  const cont=q('#ubicList');
+  let rows;
+  if(vendSel){
+    // reconstruir ubicaciones SOLO del vendedor: volumen/unid de la matriz, clientes de cacheCli
+    const vol={}, uni={}, setCli={};
+    cacheMatriz.filter(r=>String(r.vendedor)===String(vendSel)).forEach(r=>{
+      vol[r.ubicacion]=(vol[r.ubicacion]||0)+r.volumen; uni[r.ubicacion]=(uni[r.ubicacion]||0)+r.unidades;
+    });
+    cacheCli.filter(r=>String(r.vendedor)===String(vendSel)).forEach(r=>{
+      (setCli[r.ubicacion]=setCli[r.ubicacion]||new Set()).add(r.nit);
+    });
+    rows=Object.keys(vol).map(u=>({ubicacion:u,volumen:vol[u],unidades:uni[u],clientes:setCli[u]?setCli[u].size:0}))
+                         .sort((a,b)=>b.volumen-a.volumen);
+  } else { rows=cacheUbic; }
+  if(!rows||!rows.length){ cont.innerHTML='<div class="empty">Sin ventas en este filtro.</div>'; return; }
+  const max=Math.max(...rows.map(r=>Math.abs(r.volumen||0)))||1;
+  cont.innerHTML=rows.map(r=>{
+    const neg=(r.volumen||0)<0;
+    const pct=Math.min(100,(Math.abs(r.volumen||0)/max)*100).toFixed(1);
+    const act=(r.ubicacion===ubicSel)?' active':'';
+    return `<div class="ubic-row${act}" data-u="${esc(r.ubicacion)}" onclick="selUbic(this)">
+      <div class="rname"><span class="dot"${neg?' style="background:#dc2626"':''}></span>${esc(r.ubicacion)}</div>
+      <div class="bar-wrap"><div class="bar" style="width:${pct}%${neg?';background:linear-gradient(90deg,#f87171,#dc2626)':''}"></div></div>
+      <div class="rval"${neg?' style="color:#dc2626"':''}>${COP(r.volumen)}</div>
+      <div class="rsub">${NUM(r.unidades)} u · ${NUM(r.clientes)} cli</div>
+    </div>`;
+  }).join('');
+}
+function selUbic(el){
+  const u=el.dataset.u;
+  if(ubicSel===u){ ubicSel=null; } else { ubicSel=u; }
+  document.querySelectorAll('.ubic-row').forEach(x=>x.classList.toggle('active', x.dataset.u===ubicSel));
+  pintarFiltros(); pintarProd(); pintarCli();
+}
+
+// ── POR VENDEDOR (tabla) ──
+async function cargarVend(){
+  const tb=q('#tVend tbody'); tb.innerHTML='<tr><td colspan="7" class="loading">Cargando…</td></tr>';
+  try{ cacheVend=await get('/api/bloque1'); llenarSelectVend(); pintarVend(); }
+  catch(e){ tb.innerHTML='<tr><td colspan="7" class="empty">Error: '+e.message+'</td></tr>'; }
+}
+function llenarSelectVend(){
+  const sel=q('#selVend'); if(!sel) return;
+  const ops=['<option value="">Todos</option>'].concat(
+    [...cacheVend].sort((a,b)=>String(a.vendedor).localeCompare(String(b.vendedor)))
+      .map(r=>`<option value="${esc(r.vendedor)}">${esc(r.vendedor)} ${esc(nombreVend(r.vendedor))}</option>`));
+  sel.innerHTML=ops.join(''); sel.value=vendSel||'';
+}
+const VEND_NOMBRE={'01':'Harold Marín','02':'Danny Troncoso','03':'Alexander Sánchez','04':'Juan C. Quintana','06':'Lorenzo Castellar','10':'Gleydis Enamorado','17':'Claudia González','22':'Juan C. Zabala','26':'Reyes Álvarez Roy','28':'Rubén Abendaño','32':'Julieth Rodríguez'};
+function nombreVend(v){ const k=String(v).padStart(2,'0'); return VEND_NOMBRE[k]||''; }
+function pintarVend(){
+  const tb=q('#tVend tbody');
+  if(!cacheVend.length){ tb.innerHTML='<tr><td colspan="7" class="empty">Sin datos.</td></tr>'; return; }
+  const rows=ordenar(cacheVend,sortVend);
+  tb.innerHTML=rows.map(r=>`<tr class="clk ${String(r.vendedor)===String(vendSel)?'active':''}" data-v="${esc(r.vendedor)}" onclick="selVend('${esc(r.vendedor)}',this)">
+    <td><b>${esc(r.vendedor)}</b> ${esc(nombreVend(r.vendedor))}</td>
+    <td class="num">${NUM(r.clientes)}</td>
+    <td class="num hide-sm">${NUM(r.unidades)}</td>
+    <td class="num">${COP(r.brutas)}</td>
+    <td class="num" style="color:#b91c1c">${r.devoluciones?'−'+COP(r.devoluciones):COP(0)}</td>
+    <td class="num"><b>${COP(r.volumen)}</b></td>
+    <td class="num hide-sm">${COP(r.ticket)}</td>
+  </tr>`).join('');
+}
+function selVend(v,el){
+  if(String(vendSel)===String(v)){ vendSel=null; } else { vendSel=v; }
+  aplicarVend();
+}
+function cambiarVend(v){ vendSel=v||null; aplicarVend(); }
+function aplicarVend(){
+  document.querySelectorAll('#tVend tr').forEach(x=>x.classList.toggle('active', String(x.dataset.v)===String(vendSel)));
+  const sel=q('#selVend'); if(sel) sel.value=vendSel||'';
+  pintarFiltros(); renderResumen(); renderUbic(); pintarProd(); pintarCli();
+}
+
+// ── MATRIZ vendedor x ubicacion ──
+async function cargarMatriz(){
+  const box=q('#matrizBox'); box.innerHTML='<div class="loading">Cargando…</div>';
+  try{
+    cacheMatriz=await get('/api/matriz'); const rows=cacheMatriz;
+    if(!rows.length){ box.innerHTML='<div class="empty">Sin datos.</div>'; return; }
+    const vends=[...new Set(rows.map(r=>r.vendedor))];
+    const ubicTot={}; rows.forEach(r=>ubicTot[r.ubicacion]=(ubicTot[r.ubicacion]||0)+r.volumen);
+    const ubics=Object.keys(ubicTot).sort((a,b)=>ubicTot[b]-ubicTot[a]);
+    const cell={}; rows.forEach(r=>cell[r.vendedor+'|'+r.ubicacion]=r.volumen);
+    const vendTot={}; vends.forEach(v=>vendTot[v]=ubics.reduce((a,u)=>a+(cell[v+'|'+u]||0),0));
+    // vendedores en COLUMNAS, ordenados por total desc; ubicaciones en FILAS
+    const vendsSorted=vends.sort((a,b)=>vendTot[b]-vendTot[a]);
+    const maxCell=Math.max(...rows.map(r=>Math.abs(r.volumen||0)))||1;
+    let h='<table class="matriz"><thead><tr><th>Ubicación \\ Vend</th>'
+      + vendsSorted.map(v=>`<th><div><b>${esc(v)}</b></div><div style="font-weight:400;font-size:10px;color:var(--muted)">${esc(nombreVend(v))}</div></th>`).join('')
+      + '<th class="tot">Total</th></tr></thead><tbody>';
+    ubics.forEach(u=>{
+      h+=`<tr><td>${esc(u)}</td>`;
+      vendsSorted.forEach(v=>{
+        const val=cell[v+'|'+u]||0;
+        const neg=val<0;
+        const op=(Math.abs(val)/maxCell*0.6+0.08).toFixed(2);
+        const bg=neg?`rgba(220,38,38,${op})`:`rgba(28,165,196,${op})`;
+        h+=`<td>${val?`<span class="heat" style="background:${bg}${neg?';color:#991b1b':''}">${NUM(val)}</span>`:'<span class="muted">·</span>'}</td>`;
+      });
+      h+=`<td class="tot">${COP(ubicTot[u])}</td></tr>`;
+    });
+    h+='</tbody><tfoot><tr><td>Total</td>'
+      + vendsSorted.map(v=>`<td>${COP(vendTot[v])}</td>`).join('')
+      + `<td>${COP(Object.values(vendTot).reduce((a,b)=>a+b,0))}</td></tr></tfoot></table>`;
+    box.innerHTML=h;
+  }catch(e){ box.innerHTML='<div class="empty">Error: '+e.message+'</div>'; }
+}
+
+// ── PRODUCTOS ──
+async function cargarProd(){
+  const tb=q('#tProd tbody'); tb.innerHTML='<tr><td colspan="5" class="loading">Cargando…</td></tr>';
+  try{ cacheProd=await get('/api/productos'); pintarProd(); }
+  catch(e){ tb.innerHTML='<tr><td colspan="5" class="empty">Error: '+e.message+'</td></tr>'; }
+}
+function pintarProd(){
+  const tb=q('#tProd tbody');
+  let base=aplicarFiltros(cacheProd);
+  let rows=agrupar(base,r=>r.referencia+'|'+r.ubicacion);
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="5" class="empty">Sin datos.</td></tr>'; return; }
+  rows=ordenar(rows,sortProd);
+  tb.innerHTML=rows.map(r=>`<tr>
+    <td>${esc(r.referencia)}</td>
+    <td>${esc(r.descripcion)}</td>
+    <td class="hide-sm">${esc(r.ubicacion)}</td>
+    <td class="num">${NUM(r.unidades)}</td>
+    <td class="num">${COP(r.volumen)}</td>
+  </tr>`).join('');
+}
+
+// ── CLIENTES ──
+async function cargarCli(){
+  const tb=q('#tCli tbody'); tb.innerHTML='<tr><td colspan="6" class="loading">Cargando…</td></tr>';
+  try{ cacheCli=await get('/api/clientes'); pintarCli(); }
+  catch(e){ tb.innerHTML='<tr><td colspan="6" class="empty">Error: '+e.message+'</td></tr>'; }
+}
+function pintarCli(){
+  const tb=q('#tCli tbody');
+  let base=aplicarFiltros(cacheCli);
+  let rows=agrupar(base,r=>r.nit);
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="6" class="empty">Sin datos.</td></tr>'; return; }
+  rows=ordenar(rows,sortCli);
+  tb.innerHTML=rows.map(r=>{
+    const tel=(r.telefono||'').toString().replace(/\D/g,'');
+    const wa=tel?`<a class="wa" target="_blank" href="https://wa.me/57${tel}?text=${waMsg(r)}">💬 Escribir</a>`:'<span class="muted">—</span>';
+    return `<tr>
+      <td>${esc(r.cliente||r.nit)}</td>
+      <td class="hide-sm">${esc(r.ciudad||'')}</td>
+      <td class="hide-sm">${esc(r.vendedor||'')}</td>
+      <td class="num">${NUM(r.unidades)}</td>
+      <td class="num">${COP(r.volumen)}</td>
+      <td>${wa}</td>
+    </tr>`;
+  }).join('');
+}
+function waMsg(r){
+  const u=ubicSel?` (${ubicSel})`:'';
+  return encodeURIComponent(`Hola ${r.cliente||''}, le escribimos de Distrileco sobre productos BRINSA${u}. ¿Le programamos su pedido?`);
+}
+
+// ── Helpers de filtro/agrupación ──
+function aplicarFiltros(rows){
+  return rows.filter(r=>(!ubicSel||r.ubicacion===ubicSel)&&(!vendSel||String(r.vendedor)===String(vendSel)));
+}
+function agrupar(rows,keyFn){
+  const map={};
+  rows.forEach(r=>{ const k=keyFn(r); if(!map[k]) map[k]={...r}; else { map[k].volumen+=r.volumen; map[k].unidades+=r.unidades; } });
+  return Object.values(map);
+}
+function ordenar(arr,s){
+  return [...arr].sort((a,b)=>{
+    let x=a[s.k],y=b[s.k];
+    if(typeof x==='string'){x=(x||'').toLowerCase();y=(y||'').toLowerCase();return x<y?-s.dir:x>y?s.dir:0;}
+    return ((x||0)-(y||0))*s.dir;
+  });
+}
+document.querySelectorAll('#tProd th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(!k)return;sortProd={k,dir:sortProd.k===k?-sortProd.dir:(typeof cacheProd[0]?.[k]==='string'?1:-1)};pintarProd();});
+document.querySelectorAll('#tCli th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(!k)return;sortCli={k,dir:sortCli.k===k?-sortCli.dir:(typeof cacheCli[0]?.[k]==='string'?1:-1)};pintarCli();});
+document.querySelectorAll('#tVend th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(!k)return;sortVend={k,dir:sortVend.k===k?-sortVend.dir:(typeof cacheVend[0]?.[k]==='string'?1:-1)};pintarVend();});
+
+function tick(){ q('#reloj').textContent=fechaCol().toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'short'})+' (Col)'; }
+setInterval(tick,1000); tick();
+initMeses();
+</script>
+</body>
+</html>

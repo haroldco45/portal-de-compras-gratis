@@ -1,0 +1,14 @@
+{
+  "name": "Portal de Compras gratis — Adiós al cuaderno",
+  "short_name": "Adiós cuaderno",
+  "description": "Use gratis Portal de Compras: registre compras a proveedores y controle vencimientos desde el celular.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#EB0A1E",
+  "lang": "es-CO",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
